@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Weather</title>
+
+    <style>
+      .weather {
+        position: relative;
+      }
+
+      @property --angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+      }
+
+      .weather::after,
+      .weather::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: conic-gradient(
+          from var(--angle),
+          transparent 20%,
+          var(--color-orange-500)
+        );
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        z-index: -1;
+        padding: 5px;
+        border-radius: 15px;
+        animation: 3s spin linear infinite;
+      }
+
+      .weather::before {
+        filter: blur(1.5rem);
+        opacity: 0.5;
+      }
+
+      @keyframes spin {
+        from {
+          --angle: 0deg;
+        }
+        to {
+          --angle: 360deg;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-neutral-50 flex flex-col gap-8 items-center justify-center h-screen"
+  >
+    <div
+      class="weather w-fit text-center bg-white p-18 rounded-lg max-md:p-7 max-md:py-10"
+    >
+      <h1
+        class="text-3xl font-semibold mb-5 uppercase max-md:text-sm max-md:mb-3"
+      >
+        Check Your City's Weather
+      </h1>
+      <div class="place">
+        <i
+          ><p class="location text-xl font-semibold max-md:text-md">
+            Surabaya
+          </p></i
+        >
+        <p class="dateTime text-sm">12:58-Monday 2025-09-26</p>
+      </div>
+      <div class="flex flex-row items-center justify-center max-md:flex-col">
+        <div class="degree">
+          <p class="text-8xl font-bold max-md:text-6xl">20</p>
+        </div>
+        <div class="info max-md:flex max-md:items-center">
+          <img src="" alt="icon" class="w-10" />
+          <p>mist</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="search-bar w-screen">
+      <form action="" class="text-center">
+        <input
+          type="text"
+          placeholder="Search for location"
+          class="search_field border-orange-500 border-3 p-2 rounded-lg bg-white"
+        />
+        <button
+          type="submit"
+          class="search_button bg-orange-500 text-white p-3 rounded-lg font-semibold cursor-pointer"
+        >
+          Search
+        </button>
+      </form>
+    </nav>
+  </body>
+  <script type="module" src="script.mjs"></script>
+</html>
